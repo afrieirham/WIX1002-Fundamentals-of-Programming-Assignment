@@ -17,6 +17,7 @@ public class Blackjack70 {
         int money = 1000;
         boolean gameEnd = false;
         int bet = 0;
+        int gamePlay = 0;
 
         Deck playingCard = new Deck();
         playingCard.createFullDeck();
@@ -24,29 +25,56 @@ public class Blackjack70 {
 
         while(true){
             do{
-                System.out.print(name);
-                System.out.println(", you have RM" + money + ".");
-                System.out.print("Bet: RM");
                 Scanner input = new Scanner(System.in);
+
+                System.out.println("");
+                System.out.println("1 - Play");
+                System.out.println("0 - Exit");
+                System.out.print("Enter [1] to play: ");
+                gamePlay = input.nextInt();
+                if(gamePlay == 0){
+                    System.out.println("");
+                    System.out.println("");
+                    System.out.println("_______________________________________");
+                    System.out.println("Thank you for playing.");
+                    System.out.println("Congratulations!");
+                    System.out.println("You leave with RM" + money);
+                    System.out.println("Play again next time!");
+                    break;
+                }
+                System.out.println("");
+                System.out.println("");
+                System.out.println(name + ", you have RM" + money + ".");
+                System.out.println("Place your bet:");
+                System.out.print("RM");
                 bet = input.nextInt();
 
-                if( bet > money){
-                    System.out.println("Tf");
+                if( bet > money || bet == 0){
+                    System.out.println("Make a realistic bet.");
                 }
-            }while(bet>money);
-            if(bet == 0){break;}
-
-            boolean game = playBlackjack(name);
+            }while(bet>money || bet == 0);
+            if(gamePlay == 0){break;}
+            boolean game = playBlackjack(name, money, bet);
 
             if(game){
                 //Player Wins
                 money += bet;
+                System.out.println("");
+                System.out.println("Current money: RM" + money);
             }
             else{
                 money -= bet;
+                System.out.println("");
+                System.out.println("Current money: RM" + money);
             }
 
             if(money == 0){
+                System.out.println("");
+                System.out.println("You're kicked.");
+                System.out.println("_______________________________________");
+                System.out.println(name + ",");
+                System.out.println("You are out of money.");
+                System.out.println("Don't gamble again!");
                 break;
             }
 
@@ -54,10 +82,10 @@ public class Blackjack70 {
         }
     }
 
-    public static boolean playBlackjack(String name){
+    public static boolean playBlackjack(String name, int money, int bet){
 
         Player P1 = new Player(name);
-        Player P2 = new Player();
+        Player P2 = new Player("Dealer");
 
         P1.drawCard();
         P1.drawCard();
@@ -87,16 +115,17 @@ public class Blackjack70 {
         while(true){
             System.out.println("");
             System.out.println("");
-            System.out.println(P1.name + ": Your Hand ");
+            System.out.println(P1.name + "'s hand: ");
             System.out.println("--------------");
             P1.getAllCard();
             P1.totalValue();
-            System.out.println("Total Hand = " + P1.totalValue());
+            System.out.println("______________");
+            System.out.println("Total: " + P1.totalValue());
             System.out.println("--------------");
 
             System.out.println("");
             System.out.println("");
-            System.out.println("Dealer:");
+            System.out.println(P2.name + "'s hand: ");
             System.out.println("--------------");
             P2.getCard(0);
             P2.totalValue();
@@ -109,6 +138,7 @@ public class Blackjack70 {
             do{
                 System.out.println("1 - Hit");
                 System.out.println("2 - Stand");
+                System.out.print("Your move: ");
                 userMove = input.nextInt();
                 if(userMove != 1 && userMove != 2){
                     System.out.println("Please make a valid move.");
@@ -119,13 +149,15 @@ public class Blackjack70 {
                 break;
             }
             if(userMove == 1){
+                System.out.println(P1.name + ": Hit!");
                 P1.drawCard();
                 P1.totalValue();
                 if(P1.totalValue() > 21){
-                    System.out.println(name + ", you bust!");
+                    System.out.println(P1.name + ": Bust!");
                     System.out.println("--------------");
                     P1.getAllCard();
-                    System.out.println("Total Hand = " + P1.totalValue());
+                    System.out.println("______________");
+                    System.out.println("Total: " + P1.totalValue());
                     System.out.println("--------------");
                     return false;
                 }
@@ -133,8 +165,63 @@ public class Blackjack70 {
 
         }
 
+        System.out.println(P1.name + ": Stand!");
+        System.out.println("Dealer:");
+        System.out.println("--------------");
+        P2.getAllCard();
+        System.out.println("______________");
+        System.out.println("Total: " + P2.totalValue());
+        System.out.println("--------------");
+        System.out.println("");
 
-        return false;
+        while(P2.totalValue() <=17 ){
+            System.out.println(P2.name + ": Hit!");
+            P2.drawCard();
+            P2.totalValue();
+            if(P2.totalValue() > 21){
+                System.out.println(P2.name + ": Bust!");
+                System.out.println("");
+                System.out.println(P2.name + "'s hand:");
+                System.out.println("--------------");
+                P2.getAllCard();
+                System.out.println("______________");
+                System.out.println("Total: " + P2.totalValue());
+                System.out.println("--------------");
+                return true;
+            }
+        }
+        System.out.println("");
+        System.out.println("Dealer's hand:");
+        System.out.println("--------------");
+        P2.getAllCard();
+        System.out.println("______________");
+        System.out.println("Total: " + P2.totalValue());
+        System.out.println("--------------");
+
+        if(P1.totalValue() > P2.totalValue()){
+            System.out.println(P1.name + ": Wins!");
+            System.out.println(P2.name + ": Lose!");
+            System.out.println(P1.name + " total: " + P1.totalValue());
+            System.out.println(P2.name + " total: " + P2.totalValue());
+            return true;
+        }
+        else if(P1.totalValue() < P2.totalValue()){
+            System.out.println(P2.name + ": Wins!");
+            System.out.println(P1.name + ": Lose!");
+            System.out.println(P2.name + " total: " + P2.totalValue());
+            System.out.println(P1.name + " total: " + P1.totalValue());
+            return false;
+        }
+        else{
+            System.out.println("Push!");
+            System.out.println(P1.name + " total: " + P1.totalValue());
+            System.out.println(P2.name + " total: " + P2.totalValue());
+            money += bet;
+            return false;
+        }
+
+
+
     }
 
 }
