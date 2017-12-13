@@ -13,17 +13,18 @@ import java.util.List;
 
 public class Player {
 
-    public int[] hands = new int[10];
+    public int[] hands = new int[100];
     public static int[] playingCard = new int[52];
 
-    private int i = 0;
-    private int cardUsed = 0;
+    protected int i = 0;
+    protected int cardUsed = 0;
     public String name;
-
+    
     public Player(String name){
         this.name = name;
+        
     }
-    
+       
     public Player(){
         
     }
@@ -33,7 +34,15 @@ public class Player {
         hands[i] = playingCard[getIndex()];
         i++;
         cardUsed++;
+        
     }
+    
+//    public void drawCard(int index){
+//
+//        hands[i] = playingCard[index];
+//        i++;
+//        cardUsed++;
+//    }
 
     public void getAllCard(){
         for(int i=0 ; i<cardUsed ; i++){
@@ -45,7 +54,7 @@ public class Player {
         System.out.println(getCardSymbol(hands[i]));
     }
 
-    private String getCardSymbol(int index){
+    protected String getCardSymbol(int index){
         String message = null;
         if(index>=40){
             index -= 39;
@@ -69,7 +78,7 @@ public class Player {
     return message;
     }
     
-    private String getCardNumber(int index){
+    protected String getCardNumber(int index){
         String message = null;
         switch(index){
                 case 1:   message = "Ace"; break;
@@ -117,7 +126,7 @@ public class Player {
         return total;
     }
 
-    private int cardValue(int index){
+    protected int cardValue(int index){
         int value = 0;
         switch (index){
             case 10:
@@ -153,7 +162,11 @@ public class Player {
         return value;
     }
     
-    private int cardNumberValue(int index){
+    public int getCardValue(int index){
+        return cardValue(hands[index]);
+    }
+    
+    protected int cardNumberValue(int index){
         int value = 0;
         if(index>40){
             index -= 39;
