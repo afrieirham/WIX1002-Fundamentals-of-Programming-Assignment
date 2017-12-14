@@ -59,21 +59,21 @@ public class Player {
         if(index>=40){
             index -= 39;
             message = getCardNumber(index);
-            message += " of Diamond";
+            message += " of \u2666";
         }
         else if(index>=27){
             index -= 26;
             message = getCardNumber(index);
-            message += " of Clubs";
+            message += " of \u2663";
         }
         else if(index>=14){
             index -= 13;
             message = getCardNumber(index);
-            message += " of Hearts";
+            message += " of \u2665";
         }
         else{   
         message = getCardNumber(index);
-        message += " of Spades";
+        message += " of \u2660";
         }
     return message;
     }
