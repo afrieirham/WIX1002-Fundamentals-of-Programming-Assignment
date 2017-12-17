@@ -10,17 +10,17 @@ package blackjack.pkg7.pkg0;
  * @author Afrie Irham
  */
 public class Moves {
-    
+
     private static int index = 0;
-    
+
     public Moves(){
-        
+
     }
-    
+
     public static int getIndex(){
         int theIndex = index;
         index++;
         return theIndex;
     }
-    
+
 }

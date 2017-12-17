@@ -15,8 +15,8 @@ import java.util.List;
  * @author Afrie Irham
  */
 public class Deck extends Player{
-    
-    
+
+
     //Creating the full Deck of card
     //Only 1 Deck
     public void createFullDeck(){
@@ -24,7 +24,7 @@ public class Deck extends Player{
             playingCard[i] = i+1;
         }
     }
-    
+
     //Shuffle the card index number from 0 - 51
     public void shuffleCard(){
         List<Integer> numbers = new ArrayList<>();
@@ -32,10 +32,10 @@ public class Deck extends Player{
           numbers.add(i);
         }
         Collections.shuffle(numbers);
-        
+
         for(int i = 0; i<52 ; i++ ){
             playingCard[i] = numbers.get(i);
         }
     }
-    
+
 }

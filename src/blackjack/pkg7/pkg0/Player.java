@@ -19,14 +19,14 @@ public class Player {
     protected int i = 0;
     protected int cardUsed = 0;
     public String name;
-    
+
     public Player(String name){
         this.name = name;
-        
+
     }
-       
+
     public Player(){
-        
+
     }
 
     public void drawCard(){
@@ -34,9 +34,9 @@ public class Player {
         hands[i] = playingCard[getIndex()];
         i++;
         cardUsed++;
-        
+
     }
-    
+
 //    public void drawCard(int index){
 //
 //        hands[i] = playingCard[index];
@@ -49,7 +49,7 @@ public class Player {
             System.out.println(getCardSymbol(hands[i]));
         }
     }
-    
+
     public void getCard(int i){
         System.out.println(getCardSymbol(hands[i]));
     }
@@ -71,13 +71,13 @@ public class Player {
             message = getCardNumber(index);
             message += " of \u2665";
         }
-        else{   
+        else{
         message = getCardNumber(index);
         message += " of \u2660";
         }
     return message;
     }
-    
+
     protected String getCardNumber(int index){
         String message = null;
         switch(index){
@@ -161,11 +161,11 @@ public class Player {
         }
         return value;
     }
-    
+
     public int getCardValue(int index){
         return cardValue(hands[index]);
     }
-    
+
     protected int cardNumberValue(int index){
         int value = 0;
         if(index>40){
@@ -183,7 +183,7 @@ public class Player {
         else{
             value = index;
         }
-        
+
         return value;
     }
 

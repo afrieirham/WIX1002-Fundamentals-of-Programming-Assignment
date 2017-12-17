@@ -13,16 +13,16 @@ import static blackjack.pkg7.pkg0.Player.playingCard;
  * @author Afrie Irham
  */
 public class Split extends Player{
-    
+
     int[] newHand = new int[100];
     private int cardUsed = 1;
     private int i = 1;
-    
+
     public Split(String name, int CardValue){
         this.name = name;
         newHand[0] = CardValue;
     }
-    
+
     public void drawCard(){
 
         newHand[i] = playingCard[getIndex()];
@@ -31,17 +31,17 @@ public class Split extends Player{
         super.cardUsed++;
         this.cardUsed++;
     }
-    
+
     public int getCardValue(int index){
         return cardValue(newHand[index]);
     }
-    
+
     public void getAllCard(){
         for(int i=0 ; i<this.cardUsed ; i++){
             System.out.println(getCardSymbol(newHand[i]));
         }
     }
-    
+
     public int totalValue(){
         int total = 0;
         int aceCounter = 0;

@@ -177,7 +177,7 @@ public class Blackjack70 {
             }
             ////////////////////////////////////////////////////////////////////
             if(userMove == 3){
-                
+
                 left = new Split(P1.name, P1.getCardValue(0));
                 right = new Split(P1.name, P1.getCardValue(1));
                 int leftMove = 100;
@@ -368,8 +368,8 @@ public class Blackjack70 {
                 System.out.println("Push!");
                 System.out.println(P1.name + "'s left hand total: " + left.totalValue());
                 System.out.println(P2.name + " total: " + P2.totalValue());
-                
-                
+
+
             }
 
             if(right.totalValue() > P2.totalValue()){
@@ -397,7 +397,7 @@ public class Blackjack70 {
                 System.out.println("Push!");
                 System.out.println(P1.name + "'s right hand total: " + right.totalValue());
                 System.out.println(P2.name + " total: " + P2.totalValue());
-                
+
             }
         }
         return money;
